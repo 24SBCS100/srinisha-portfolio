@@ -161,7 +161,7 @@ export default function DesktopGrid({ theme }) {
 
         <div className="about-header">
           <img
-            src="/images/profile.webp"
+            src="/images/srinisha.jpg"
             alt="Srinisha"
             className="about-avatar"
           />
