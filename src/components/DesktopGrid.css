@@ -1,0 +1,627 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  image-rendering: auto;
+}
+
+/* ========== LAYOUT ========== */
+
+.desktop-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.desktop-wrapper span {
+  color: var(--accent);
+}
+
+/* ========== MAIN WINDOW ========== */
+
+.main-window {
+  width: 680px;
+  max-width: calc(100vw - 2rem);
+  background: var(--bg);
+  /* Unified outer outline that perfectly hugs the curves: */
+  border-radius: 12px;
+  border: 2px solid var(--window-border); 
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  overflow: hidden; /* This traps the header so it doesn't spill over the curves */
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  
+  position: relative;
+  z-index: 10; /* Ensures the main window is above the flying bat */
+}
+
+.window-bar {
+  background: var(--title-bg);
+  color: var(--title-text);
+  padding: 0.75rem 1.5rem;
+  font-size: 1.15rem;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  border-bottom: 2px solid var(--window-border);
+}
+
+/* ========== CONTENT ========== */
+
+.window-content {
+  padding: 2rem 3rem 2.5rem;
+}
+
+.window-content h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.9;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+/* Dark mode: hola! turns yellow */
+[data-theme="dark"] .window-content h1 {
+  color: #ffdf6b;
+}
+
+/* "i’m hari karthick" stays accent always */
+.window-content h1 span {
+  color: var(--accent);
+}
+
+.window-content p {
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  color: #666;
+  margin-bottom: 2.5rem;
+  transition: color 0.25s ease;
+}
+
+/* ========== ICON GRID ========== */
+
+.icon-grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  justify-content: center;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* ========== ICON BUTTON ========== */
+
+/* icon button effects */
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+
+.icon-btn span {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  font-family: var(--font-mono);
+  line-height: 1;
+  text-transform: lowercase;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+
+[data-theme="dark"] .icon-btn span {
+  color: #e6edf3;
+}
+
+.icon-motion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  will-change: transform;
+}
+
+.icon-image {
+  width: clamp(42px, 4vw, 60px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* soft pink/dark pink icon background boxes! */
+.icon-image-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 13px;
+  background: #fff4f8; /*soft pink*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+[data-theme="dark"] .icon-image-wrapper {
+  background: rgba(255, 200, 220, 0.18);
+}
+
+[data-theme="dark"] .icon-btn span {
+  color: #e6edf3;
+  /* soft white, not pure white ~hehe */
+}
+
+.icon-btn:hover span {
+  color: var(--accent);
+}
+
+.main-window:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+.icon-btn:hover .icon-image-wrapper {
+  transform: translateY(-2px);
+}
+
+/*====== About content ======*/
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 28px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.about-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-avatar:hover {
+  transform: scale(1.06);
+}
+
+.about-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-name {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0;
+}
+
+.about-name span {
+  color: var(--text);
+  transform: 
+    transition 0.5s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+.about-name span:hover {
+  color: var(--accent);
+}
+.about-sub {
+  color: var(--text);
+  opacity: 0.75;
+  margin: 0;
+}
+
+.about-body {
+  padding: 22px 28px;
+  overflow-y: auto;
+  max-height: 320px;
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 5;
+}
+
+.about-body h3 {
+  color: var(--text);
+  margin-top: 26px;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.about-body ul {
+  padding-left: 20px;
+}
+
+.about-body li {
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+/* ========== PIXEL-PERFECT LINKS SECTION ========== */
+.links-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 3.5rem 2rem 2rem;
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns like the image */
+  gap: 2rem;
+  width: 100%;
+  justify-items: center;
+}
+
+.link-icon-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.link-text-label {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: lowercase;
+  color: var(--text);
+}
+
+
+blockquote {
+  border-left: 4px solid rgba(120, 120, 120, 0.3);
+  padding-left: 8px;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+blockquote span {
+  color: var(--text);
+  transform: 
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+blockquote span:hover {
+  color: var(--accent);
+}
+
+.modal-about {
+  width: 720px;
+  max-width: 90vw;
+}
+
+[data-theme="dark"] .about-body {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* ===== CINEMATIC MASONRY - Gallery ===== */
+
+.masonry-grid {
+  column-count: 3;
+  column-width: 30px;
+  column-gap: 18px;
+}
+
+.masonry-grid img {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 18px;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+
+  will-change: transform;
+  transform: translateZ(0);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+.masonry-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* LIGHTBOX */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.lightbox-image {
+  max-width: 85%;
+  max-height: 85vh;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  cursor: grab;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 60px;
+  color: white;
+  cursor: pointer;
+  padding: 20px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-nav:hover {
+  opacity: 1;
+}
+
+.lightbox-nav.left {
+  left: 30px;
+}
+
+.lightbox-nav.right {
+  right: 30px;
+}
+
+/* ========== MOBILE RESPONSIVE ========== */
+@media (max-width: 768px) {
+
+  .desktop-wrapper {
+    padding: 1rem;
+  }
+
+  .main-window {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+  }
+
+  .window-content {
+    padding: 2rem 1.4rem;
+  }
+
+  .window-content h1 {
+    font-size: 2.1rem;
+    line-height: 1.25;
+  }
+
+  .window-content p {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ICON GRID 2x2 */
+  .icon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+  }
+
+/*about part*/
+
+.about-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 20px 20px; /* Exact top spacing */
+    gap: 12px;
+    border-bottom: none; /* Removes the desktop border to prevent double-lines */
+  }
+
+  .about-avatar {
+    width: 100px; /* Perfectly scaled down for mobile */
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .about-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .about-name {
+    font-size: 1.5rem; /* Prevents awkward wrapping on small phones */
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .about-sub {
+    font-size: 0.9rem; /* Smaller subtitle size */
+    line-height: 1.4;
+    margin: 0;
+    opacity: 0.8;
+    padding: 0 10px;
+  }
+
+  .about-divider {
+    margin: 0 20px; /* Gives the horizontal line exact breathing room */
+    width: calc(100% - 40px);
+  }
+
+  .about-body {
+    padding: 20px 20px 40px; /* Reduced side padding so text isn't squished */
+    font-size: 0.95rem; /* Standard readable mobile text */
+    line-height: 1.6;
+    text-align: left;
+    
+    /* Forces the whole page to scroll smoothly */
+    overflow-y: visible;
+    max-height: none;
+  }
+
+  .about-body h3 {
+    font-size: 1.1rem; /* Proportional header size */
+    margin-top: 24px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .about-body blockquote {
+    font-size: 0.9rem;
+    padding-left: 12px;
+    margin: 8px 0;
+  }
+
+  .about-body ul {
+    padding-left: 20px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .about-body li {
+    margin-bottom: 4px;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .desktop-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--text);
+    opacity: 0.7;
+    padding: 18px 0;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
+}
+
+
+/* Mobile adjustments for the 4-column grid */
+@media (max-width: 768px) {
+  .links-grid {
+    grid-template-columns: repeat(3, 1fr); /* Back to 2 columns for mobile screens */
+    gap: 1rem;
+  }
+  
+  .links-hint-box {
+    padding: 0.8rem 1rem;
+    width: 90%;
+    text-align: center;
+  }
+}
+
+@media (pointer: coarse) {
+  .icon-btn {
+    padding: 0.75rem;
+  }
+
+  .icon-image-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon-image {
+    width: 44px;
+    height: 46px;
+  }
+
+  .icon-btn span {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+/*LIGHT SCROLLBAR*/
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c7c7;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark Mode Scrollbar */
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
