@@ -224,7 +224,7 @@ export default function DesktopGrid({ theme }) {
       <div className="links-container">
         <div className="links-grid">
           {[
-            { id: "github", label: "github", link: "https://github.com/devilofrdx12", icon: "/images/icon_links.webp" },
+            { id: "github", label: "github", link: "https://github.com/24SBCS100/", icon: "/images/icon_links.webp" },
             { id: "linkedin", label: "linkedin", link: "https://www.linkedin.com/in/sri-nisha-416770357?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", icon: "/images/icon_links.webp" },
             { id: "instagram", label: "instagram", link: "https://www.instagram.com/akira_tsugokiarts?igsh=ZzVsNzA4d3BteWJ2", icon: "/images/icon_ig_solid.webp" },
           ].map((item) => (
